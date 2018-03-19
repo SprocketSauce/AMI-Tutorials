@@ -18,21 +18,31 @@ public class Graph
 
 	public LinkedList<Edge> getEdges() { return edges; }
 
+	public Vertex getVertex( String name )
+	{
+		Vertex vert = null;
+
+		for ( Vertex v : vertices )
+		{
+			if ( name.equals( v.getName() ) )
+			{
+				vert = v;
+			}
+		}
+
+		return vert;
+	}
+
 	public String toString()
 	{
 		String info = "VERTICES:\n";
 
-		for ( int i = 0; i < vertices.size(); i++ )
+		for ( Vertex v : vertices )
 		{
-			info = info + vertices.get(i).getName();
-			
-			if ( i < vertices.size() - 1 )
-			{
-				info = info + ", ";
-			}
+			info = info + v.toString() + "\n";
 		} // end for
 
-		info = info + "\n\nEDGES:\n";
+		info = info + "\nEDGES:\n";
 
 		for ( Edge e : edges )
 		{
@@ -75,19 +85,34 @@ public class Graph
 	public boolean addEdge( String nameA, String nameB, int weight )
 	{
 		Vertex vertexA, vertexB;
+		
+		vertexA = getVertex( nameA );
+		if ( vertexA == null )
+		{
+			vertexA = new Vertex( nameA );
+			addVertex( vertexA );			
+		}
 
-		vertexA = new Vertex( nameA );
-		vertexB = new Vertex( nameB );
+		vertexB = getVertex( nameB );
+		if ( vertexB == null )
+		{
+			vertexB = new Vertex( nameB );
+			addVertex( vertexB );
+		}
 
 		return addEdge( vertexA, vertexB, weight );
 	} // end mutator
 
 	public boolean addEdge( Vertex vertexA, Vertex vertexB, int weight )
 	{
-		addVertex( vertexA );
-		addVertex( vertexB );
+		Edge inEdge;
 
-		return addEdge( new Edge( vertexA, vertexB, weight ) );
+		inEdge = new Edge( vertexA, vertexB, weight );
+		
+		vertexA.addEdge( inEdge );
+		vertexB.addEdge( inEdge );
+
+		return addEdge( inEdge );
 	} // end mutator
 
 	public boolean addEdge( Edge inEdge )
