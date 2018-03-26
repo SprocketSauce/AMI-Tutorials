@@ -33,6 +33,15 @@ public class Graph
 		return vert;
 	}
 
+	public Vertex getRoot()
+	{
+		Vertex root;
+
+		root = vertices.peek();
+
+		return root;
+	}
+
 	public String toString()
 	{
 		String info = "VERTICES:\n";
@@ -85,12 +94,12 @@ public class Graph
 	public boolean addEdge( String nameA, String nameB, int weight )
 	{
 		Vertex vertexA, vertexB;
-		
+
 		vertexA = getVertex( nameA );
 		if ( vertexA == null )
 		{
 			vertexA = new Vertex( nameA );
-			addVertex( vertexA );			
+			addVertex( vertexA );
 		}
 
 		vertexB = getVertex( nameB );
@@ -108,7 +117,7 @@ public class Graph
 		Edge inEdge;
 
 		inEdge = new Edge( vertexA, vertexB, weight );
-		
+
 		vertexA.addEdge( inEdge );
 		vertexB.addEdge( inEdge );
 

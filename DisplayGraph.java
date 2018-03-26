@@ -6,11 +6,11 @@ public class DisplayGraph
 	public static void main( String[] args )
 	{
 		String filename, graphDisplay;
-		Graph graph;	
+		Graph graph;
 
 		filename = inputString( "Enter name of graph file: " );
 		System.out.println();
-		
+
 		try
 		{
 			graph = GraphLoader.loadGraph( filename );
@@ -22,7 +22,7 @@ public class DisplayGraph
 		}
 	} // end main
 
-	private static String inputString( String prompt )
+	public static String inputString( String prompt )
 	{
 		Scanner sc = new Scanner( System.in );
 		String input;
